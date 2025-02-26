@@ -1,0 +1,132 @@
+.wall2-printing-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: linear-gradient(to right, #a0009e, #0078d4);
+    color: white;
+    padding: 50px;
+    font-family: "Arial", sans-serif;
+  }
+  
+  .left-section {
+    width: 45%;
+    text-align: left;
+  }
+  
+  .left-section h1 {
+    font-size: 48px;
+    font-weight: bold;
+  }
+  
+  .highlight {
+    color: #feda00;
+  }
+  
+  .left-section p {
+    font-size: 18px;
+    margin-bottom: 20px;
+  }
+  
+  .free-consultation-btn {
+    background-color: #feda00;
+    color: black;
+    font-weight: bold;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    margin-bottom: 30px;
+  }
+  
+  .printing-van {
+    width: 100%;
+    max-width: 400px;
+  }
+  
+  .right-section {
+    width: 50%;
+    padding: 30px;
+    border-radius: 15px;
+    /* box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2); */
+  }
+  
+  .right-section h2 {
+    color: #feda00;
+    font-size: 24px;
+    font-weight: bold;
+  }
+  
+  form {
+    display: flex;
+    flex-direction: column;
+    background: transparent;
+  }
+  
+  input, textarea {
+    font-family: 'DM Sans', sans-serif;
+    width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    border: none;
+    /* border-radius: 5px; */
+    background: transparent;
+    /* border: 1px solid white; */
+    color: white;
+    /* border-bottom: 1px solid white; */
+  }
+
+  :focus{
+    outline: none;
+  }
+
+  ::placeholder{
+    color: white;
+  }
+  
+  .input-group {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .input-group input {
+    width: 48%;
+  }
+  
+  textarea {
+    height: 80px;
+    resize: none;
+  }
+  
+  .captcha {
+    display: flex;
+    flex-direction: column;
+    margin: 10px 0;
+  }
+  
+  .captcha-box {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .recaptcha {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .get-started-btn {
+    background-color: #feda00;
+    color: black;
+    font-weight: bold;
+    padding: 15px;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 20px;
+    /* width: 50%; */
+
+ 
+  }
+  
