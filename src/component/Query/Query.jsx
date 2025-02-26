@@ -1,42 +1,87 @@
-// src/Query.jsx
 import React, { useState } from 'react';
+import axios from 'axios';
 
-function Query() {
-    const [emailStatus, setEmailStatus] = useState('');
+const Query = () => {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    message: '',
+  });
 
-    const handleSubmit = async (event) => {
-        event.preventDefault();
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+  // import axios from 'axios';
 
-        try {
-            const response = await fetch('http://localhost/projecthey/backendphp/send_email.php', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify({}),
-            });
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-            if (response.ok) {
-                const data = await response.text();
-                setEmailStatus(data);
-            } else {
-                console.error('Email sending failed:', response.status, response.statusText);
-                setEmailStatus('Error sending email.');
-            }
-        } catch (error) {
-            console.error('Network error:', error);
-            setEmailStatus('Network error.');
-        }
+    const formData = {
+        name: 'John Doe',
+        email: 'john@example.com',
+        phone: '1234567890',
+        message: 'Hello, I would like to inquire about your services.'
     };
 
-    return (
-        <div>
-            <form onSubmit={handleSubmit}>
-                <button type="submit">Send Test Email</button>
-            </form>
-            {emailStatus && <p>{emailStatus}</p>}
-        </div>
-    );
-}
+    try {
+      const response = await axios.post(
+        'http://localhost/projecthey/backendphp/send_email.php', // Correct path
+        formData,
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            'X-Requested-With': 'XMLHttpRequest'
+          }
+        }
+      
+        );
+        console.log(response.data); // Handle success
+    } catch (error) {
+        console.error('Error:', error); // Handle error
+    }
+};
+
+  return (
+    <div>
+      <h2>Contact Us</h2>
+      <form onSubmit={handleSubmit}>
+        <input
+          type="text"
+          name="name"
+          placeholder="Name"
+          value={formData.name}
+          onChange={handleChange}
+          required
+        />
+        <input
+          type="email"
+          name="email"
+          placeholder="Email"
+          value={formData.email}
+          onChange={handleChange}
+          required
+        />
+        <input
+          type="tel"
+          name="phone"
+          placeholder="Phone"
+          value={formData.phone}
+          onChange={handleChange}
+          required
+        />
+        <textarea
+          name="message"
+          placeholder="Message"
+          value={formData.message}
+          onChange={handleChange}
+          required
+        />
+        <button type="submit">Submit</button>
+      </form>
+    </div>
+  );
+};
 
 export default Query;
