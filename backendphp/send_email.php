@@ -1,53 +1,37 @@
 <?php
+header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Headers: Content-Type,X-Requested-With");
+header("Access-Control-Allow-Methods: POST, OPTIONS");
 
-// Handle preflight request for OPTIONS method (required for CORS)
 if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
-    header("Access-Control-Allow-Origin: http://localhost:3000"); // Allow frontend domain
-    header("Access-Control-Allow-Methods: GET, POST, OPTIONS"); // Allowed methods
-    header("Access-Control-Allow-Headers: Content-Type, X-Requested-With"); // Allowed headers
-    http_response_code(200);
-    exit; // Respond immediately to preflight request
+    exit; // Stop processing here for OPTIONS requests
 }
 
-// Set CORS headers before other output
-header("Access-Control-Allow-Origin: http://localhost:3000"); // Allow your frontend domain
-header("Access-Control-Allow-Methods: GET, POST, OPTIONS"); // Allow the methods
-header("Access-Control-Allow-Headers: Content-Type, X-Requested-With"); // Allow the necessary headers
-
-// $name = $_POST["name"];
-$name = "Vasudev";
-// $email = $_POST["email"];
-$email = "vasudev082002@gmail.com";
-// $subject = $_POST["subject"];
-$subject = "Test Subject";
-
-// $message = $_POST["message"];
-$message = "Test Message";
-require "vendor/autoload.php";
+echo "Email sent successfully!";
 
 use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
 
-$mail = new PHPMailer(true);
+require 'vendor/autoload.php';
 
-// SMTP setup and email sending logic
+try {
+    $mail = new PHPMailer(true);
+    $mail->isSMTP();
+    $mail->Host = 'smtp.gmail.com';
+    $mail->SMTPAuth = true;
+    $mail->Username = 'thevasudev31@gmail.com';
+    $mail->Password = 'hdvr ueqe yteu gjbf';
+    $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+    $mail->Port = 587;
 
-$mail->isSMTP();
-$mail->SMTPAuth = true;
-$mail->Host = "smtp.gmail.com";
-$mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-$mail->Port = 587;
+    $mail->setFrom('thevasudev31@gmail.com', 'Vasudev');
+    $mail->addAddress('roshan.5.ro.45@gmail.com', 'Roshan');
+    $mail->Subject = 'Test Email from PHPMailer';
+    $mail->Body = 'This is a test email sent using PHPMailer with SMTP.';
 
-$mail->Username = "thevasdev31@gmail.com";
-$mail->Password = "Vasudev@1234";
-
-$mail->setFrom($email, $name);
-$mail->addAddress("dave@example.com", "Dave");
-
-$mail->Subject = $subject;
-$mail->Body = $message;
-
-$mail->send();
-
-header("Location: sent.html");
+    $mail->send();
+    echo 'Email sent successfully!';
+} catch (Exception $e) {
+    echo "Email failed: {$mail->ErrorInfo}";
+}
 ?>
